@@ -1,0 +1,18 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*~
+
+# Logs / deps (none needed, but keep the folder clean)
+node_modules/
+npm-debug.log*
+*.log
+
+# Build output
+dist/
+.cache/

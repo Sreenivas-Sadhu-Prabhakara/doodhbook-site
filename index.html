@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DoodhBook — Daily delivery, month-end sorted</title>
+  <meta name="description" content="A per-customer daily ledger for milk, newspaper and water-can vendors. Variable counts and skip-days auto-tally into a clean month-end bill. Rs 399/mo." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="top">
+    <a class="nav__brand" href="#top" aria-label="DoodhBook home">
+      <span class="nav__mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 3h8l1 3H7l1-3Z" />
+          <path d="M6.5 6h11l-.7 13.5a1.6 1.6 0 0 1-1.6 1.5H8.8a1.6 1.6 0 0 1-1.6-1.5L6.5 6Z" />
+          <path d="M9.5 11.5h5" />
+        </svg>
+      </span>
+      <span class="nav__word">Doodh<b>Book</b></span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#problem">Problem</a>
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+    </nav>
+    <a href="#pricing" class="btn btn--sm nav__cta">Start free trial</a>
+  </header>
+
+  <main>
+    <!-- ============ 1. HERO ============ -->
+    <section class="hero">
+      <div class="hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow">For milk · newspaper · water-can vendors</p>
+          <h1 class="hero__title">Daily delivery,<br /><span class="u-accent">month-end sorted.</span></h1>
+          <p class="hero__lede">
+            The quantity changes every morning. Someone skips Sunday, someone takes two litres on
+            Thursday. By the 1st, the bill is a guess — and the argument at the gate is real.
+            DoodhBook keeps the daily tally for every customer and adds it up for you.
+          </p>
+          <div class="hero__actions">
+            <a href="#pricing" class="btn btn--lg">Start free trial &rarr;</a>
+            <a href="#how" class="btn btn--ghost btn--lg">See how it works</a>
+          </div>
+          <p class="hero__note">No card needed · Works on the phone you already have · Hindi &amp; English</p>
+        </div>
+
+        <!-- Signature: a ruled ledger register -->
+        <aside class="hero__ledger" aria-label="A DoodhBook daily ledger for one customer">
+          <div class="ledger">
+            <div class="ledger__head">
+              <div>
+                <p class="ledger__cust">Sharma ji · Flat B-402</p>
+                <p class="ledger__sub">Full-cream milk · Rs 62 / litre · July</p>
+              </div>
+              <span class="ledger__tag">Ledger</span>
+            </div>
+            <div class="ledger__rows" id="ledgerRows"><!-- rows injected by app.js --></div>
+            <div class="ledger__total">
+              <span>Month total</span>
+              <span class="ledger__amt" id="ledgerTotal">Rs 0</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ 2. THE PROBLEM ============ -->
+    <section class="section section--paper" id="problem">
+      <div class="wrap">
+        <p class="eyebrow eyebrow--center">The 1st-of-the-month problem</p>
+        <h2 class="section__title">Today's system is a diary, WhatsApp, and memory. All three leak.</h2>
+        <div class="cards cards--3">
+          <article class="card">
+            <div class="card__ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M8 5v14M4 9h4M4 13h4M4 17h4"/></svg>
+            </div>
+            <h3>The paper diary</h3>
+            <p>Ruled register, one line per customer, a stroke a day. Get one skip-day wrong and the
+            whole column is off. Ink smudges; the book gets wet in the monsoon.</p>
+          </article>
+          <article class="card">
+            <div class="card__ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v11H8l-4 4V4Z"/><path d="M8 9h8M8 12h5"/></svg>
+            </div>
+            <h3>The WhatsApp trail</h3>
+            <p>"Aaj do packet." "Kal band rakhna." Thirty chats, no running total. Come billing day
+            you scroll through a month of messages to reconstruct what was actually delivered.</p>
+          </article>
+          <article class="card">
+            <div class="card__ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a7 7 0 0 0-4 12.7V18h8v-2.3A7 7 0 0 0 12 3Z"/><path d="M9 21h6M10 18v3M14 18v3"/></svg>
+            </div>
+            <h3>The memory tax</h3>
+            <p>The rest lives in your head across 80 houses. When a customer says "I only took 20
+            days, not 26," you have nothing to show. You round down, you eat the loss.</p>
+          </article>
+        </div>
+        <p class="problem__line">
+          Multiply small errors across every flat and every day: a vendor doing 80 customers
+          loses <b>Rs 3,000–6,000 a month</b> to under-billing and disputes they can't win.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ 3. THE INSIGHT ============ -->
+    <section class="section insight">
+      <div class="wrap wrap--narrow">
+        <p class="eyebrow eyebrow--light">The wedge</p>
+        <p class="insight__big">
+          A tiffin plan is one fixed number a month. This isn't that.
+          <span class="u-accent-l">The quantity moves every single day</span> — and skip-days
+          break the sum. So we keep a per-customer <em>daily</em> ledger, and let the month add itself up.
+        </p>
+        <p class="insight__foot">Get the daily count right, and the monthly bill is no longer an argument. It's arithmetic.</p>
+      </div>
+    </section>
+
+    <!-- ============ 4. HOW IT WORKS ============ -->
+    <section class="section section--paper" id="how">
+      <div class="wrap">
+        <p class="eyebrow eyebrow--center">How it works</p>
+        <h2 class="section__title">Set the default once. Adjust the exceptions. The bill writes itself.</h2>
+        <ol class="steps">
+          <li class="step">
+            <span class="step__n">01</span>
+            <h3>Set each customer's default</h3>
+            <p>Sharma ji takes 1 litre of full-cream, every day, at Rs 62. Add it once — that's the
+            <code>default_qty</code> DoodhBook assumes for tomorrow and every morning after.</p>
+          </li>
+          <li class="step">
+            <span class="step__n">02</span>
+            <h3>Tap the exceptions on your route</h3>
+            <p>Two packets today? Tap +1. Family's out of town till Monday? Mark skip. Holiday for
+            the whole line? One tap. Everything else stays at the default.</p>
+          </li>
+          <li class="step">
+            <span class="step__n">03</span>
+            <h3>The month tallies live</h3>
+            <p>Every delivery is <code>qty × rate</code>, summed per product, per customer, as you
+            go. Month-to-date value is always current — no reconstruction on the 1st.</p>
+          </li>
+          <li class="step">
+            <span class="step__n">04</span>
+            <h3>Send the bill on WhatsApp</h3>
+            <p>An itemised bill — days delivered, days skipped, total — lands in your outbox ready
+            to send. The customer sees the same numbers you do. Dispute over.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ 5. FEATURES ============ -->
+    <section class="section" id="features">
+      <div class="wrap">
+        <p class="eyebrow eyebrow--center">What's inside</p>
+        <h2 class="section__title">Built for the round, not for an office.</h2>
+        <div class="cards cards--3 feats">
+          <article class="feat">
+            <span class="feat__k">Daily ledger</span>
+            <h3>Per-customer quantity ledger</h3>
+            <p>A default quantity with per-day overrides and skip/holiday days — the diary column, but it never adds up wrong.</p>
+          </article>
+          <article class="feat">
+            <span class="feat__k">Auto-tally</span>
+            <h3>Month-end bill, computed</h3>
+            <p>Sum of qty × rate per product, per customer. The total is done the moment the month ends.</p>
+          </article>
+          <article class="feat">
+            <span class="feat__k">Route sheet</span>
+            <h3>Today's deliveries by area</h3>
+            <p>One screen for the morning round, grouped by colony and lane so you move house to house without backtracking.</p>
+          </article>
+          <article class="feat">
+            <span class="feat__k">WhatsApp</span>
+            <h3>Bills &amp; reminders to outbox</h3>
+            <p>Itemised bill and a gentle payment nudge queued up per customer — send the batch in one go.</p>
+          </article>
+          <article class="feat">
+            <span class="feat__k">Dashboard</span>
+            <h3>Today, this month, top customers</h3>
+            <p>Deliveries done today, month-to-date value, and who your biggest accounts are — at a glance.</p>
+          </article>
+          <article class="feat">
+            <span class="feat__k">Multi-product</span>
+            <h3>Milk, papers &amp; cans together</h3>
+            <p>Different rates, different units — litres, copies, cans — on the same customer, same monthly bill.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 6. PRODUCT PREVIEW ============ -->
+    <section class="section section--ink" id="preview">
+      <div class="wrap">
+        <p class="eyebrow eyebrow--light eyebrow--center">Inside DoodhBook</p>
+        <h2 class="section__title section__title--light">Your whole round, on one screen.</h2>
+
+        <div class="app" role="img" aria-label="DoodhBook dashboard showing today's deliveries, month-to-date value of Rs 1,84,260, a route sheet for Kothrud, and top customers.">
+          <!-- window chrome -->
+          <div class="app__bar">
+            <span class="app__dot"></span><span class="app__dot"></span><span class="app__dot"></span>
+            <span class="app__url">doodhbook.app · Kamal Dairy, Pune</span>
+          </div>
+
+          <div class="app__body">
+            <!-- sidebar -->
+            <nav class="app__side" aria-hidden="true">
+              <span class="app__logo">Doodh<b>Book</b></span>
+              <span class="app__nav app__nav--on">Dashboard</span>
+              <span class="app__nav">Route sheet</span>
+              <span class="app__nav">Customers</span>
+              <span class="app__nav">Bills</span>
+              <span class="app__nav">Products</span>
+            </nav>
+
+            <!-- main -->
+            <div class="app__main">
+              <div class="app__hi">
+                <div>
+                  <p class="app__eye">Wednesday, 15 July 2026</p>
+                  <h3 class="app__h">Good morning, Kamal</h3>
+                </div>
+                <span class="app__badge">Route: on time</span>
+              </div>
+
+              <!-- stat tiles -->
+              <div class="stats">
+                <div class="stat">
+                  <p class="stat__k">Deliveries today</p>
+                  <p class="stat__v">78 <span>/ 84</span></p>
+                  <p class="stat__d stat__d--ok">6 marked skip today</p>
+                </div>
+                <div class="stat stat--accent">
+                  <p class="stat__k">Month-to-date value</p>
+                  <p class="stat__v">Rs 1,84,260</p>
+                  <p class="stat__d">across 84 customers</p>
+                </div>
+                <div class="stat">
+                  <p class="stat__k">Outstanding</p>
+                  <p class="stat__v">Rs 41,900</p>
+                  <p class="stat__d stat__d--warn">12 bills unpaid</p>
+                </div>
+              </div>
+
+              <div class="app__cols">
+                <!-- route sheet -->
+                <section class="panel">
+                  <div class="panel__h">
+                    <h4>Today's route · Kothrud</h4>
+                    <span class="panel__meta">22 stops</span>
+                  </div>
+                  <table class="rt">
+                    <thead>
+                      <tr><th>Customer</th><th>Product</th><th class="ta-r">Qty</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>Deshpande · B-402</td><td>Full-cream milk</td><td class="ta-r">2 L</td></tr>
+                      <tr><td>Iyer · C-11</td><td>Toned milk</td><td class="ta-r">1 L</td></tr>
+                      <tr class="rt--skip"><td>Fernandes · A-6</td><td>Loksatta paper</td><td class="ta-r">Skip</td></tr>
+                      <tr><td>Kulkarni · D-3</td><td>Water can (20 L)</td><td class="ta-r">2 cans</td></tr>
+                      <tr><td>Reddy · B-9</td><td>Toned milk</td><td class="ta-r">1.5 L</td></tr>
+                    </tbody>
+                  </table>
+                </section>
+
+                <!-- top customers -->
+                <section class="panel">
+                  <div class="panel__h">
+                    <h4>Top customers · July</h4>
+                    <span class="panel__meta">by value</span>
+                  </div>
+                  <ul class="top">
+                    <li><span class="top__name">Deshpande · B-402</span><span class="top__bar"><i style="width:100%"></i></span><span class="top__amt">Rs 3,844</span></li>
+                    <li><span class="top__name">Green Leaf Café</span><span class="top__bar"><i style="width:82%"></i></span><span class="top__amt">Rs 3,150</span></li>
+                    <li><span class="top__name">Kulkarni · D-3</span><span class="top__bar"><i style="width:61%"></i></span><span class="top__amt">Rs 2,340</span></li>
+                    <li><span class="top__name">Iyer · C-11</span><span class="top__bar"><i style="width:48%"></i></span><span class="top__amt">Rs 1,860</span></li>
+                  </ul>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="app__cap">Sample data. Real names, real areas, real rupees — the way your round actually looks.</p>
+      </div>
+    </section>
+
+    <!-- ============ 7. PRICING ============ -->
+    <section class="section section--paper" id="pricing">
+      <div class="wrap wrap--narrow">
+        <p class="eyebrow eyebrow--center">Pricing</p>
+        <h2 class="section__title">One plan. Everything in it.</h2>
+        <div class="price">
+          <div class="price__l">
+            <p class="price__k">DoodhBook</p>
+            <p class="price__amt"><span class="price__cur">Rs</span>399<span class="price__per">/ month</span></p>
+            <p class="price__save">Recovers one skipped-day dispute and it's already paid for itself.
+            Most vendors stop losing <b>Rs 3,000+</b> a month to under-billing.</p>
+            <a href="#" class="btn btn--lg" onclick="return false">Start 14-day free trial</a>
+            <p class="price__fine">No card to start · Cancel anytime · GST invoice provided</p>
+          </div>
+          <ul class="price__list" aria-label="What's included">
+            <li>Unlimited customers &amp; products</li>
+            <li>Daily ledger with skip &amp; holiday days</li>
+            <li>Automatic month-end bill tally</li>
+            <li>Area-wise route sheet</li>
+            <li>WhatsApp bills &amp; payment reminders</li>
+            <li>Dashboard: today, month-to-date, top customers</li>
+            <li>Works offline on the round, syncs later</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 8. WHO IT'S FOR + FAQ ============ -->
+    <section class="section" id="faq">
+      <div class="wrap who">
+        <div class="who__l">
+          <p class="eyebrow">Who it's for</p>
+          <h2 class="section__title">If you deliver something every morning, this is your book.</h2>
+          <ul class="who__list">
+            <li><b>Doodhwalas</b> — milk rounds where litres and packets change day to day.</li>
+            <li><b>Newspaper agents</b> — multiple titles, Sunday supplements, vacation holds.</li>
+            <li><b>Water-can suppliers</b> — variable can counts across homes, offices and cafés.</li>
+          </ul>
+        </div>
+        <div class="who__r">
+          <p class="eyebrow eyebrow--center">Questions</p>
+          <div class="faq">
+            <details>
+              <summary>Isn't this just a tiffin or subscription app?</summary>
+              <p>No. Subscription apps assume a fixed monthly quantity. DoodhBook is built for the
+              opposite: the count changes every day and people skip days. That daily variation is
+              the whole point — it's what makes month-end tallying hard, and what we solve.</p>
+            </details>
+            <details>
+              <summary>I'm not good with phones. Is it complicated?</summary>
+              <p>If you can send a WhatsApp, you can run DoodhBook. Set a customer's default once,
+              then it's just taps on your route — plus one, or skip. The bill builds itself; you
+              never do the maths.</p>
+            </details>
+            <details>
+              <summary>What if there's no signal in the building?</summary>
+              <p>The round works offline. Mark deliveries in the basement or the lift lobby with no
+              network, and it syncs the moment you're back on data. Nothing gets lost.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CLOSING CTA ============ -->
+    <section class="close">
+      <div class="wrap wrap--narrow close__in">
+        <h2>Close the book on the 1st-of-the-month argument.</h2>
+        <p>Start free. Bill your first customer from a ledger that adds up.</p>
+        <a href="#pricing" class="btn btn--lg btn--onink">Start free trial &rarr;</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ 9. FOOTER ============ -->
+  <footer class="foot">
+    <div class="wrap foot__in">
+      <div class="foot__brand">
+        <span class="nav__word">Doodh<b>Book</b></span>
+        <p>Daily delivery, month-end sorted.</p>
+      </div>
+      <div class="foot__meta">
+        <p><a href="mailto:sreeni.nintendo@gmail.com">sreeni.nintendo@gmail.com</a></p>
+        <p class="foot__studio">A <b>KARYA</b> studio build</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
