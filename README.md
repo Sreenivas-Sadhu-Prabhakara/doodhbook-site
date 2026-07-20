@@ -3,7 +3,7 @@
 Standalone marketing/explainer page for **DoodhBook** — a per-customer daily
 ledger for milk, newspaper and water-can delivery vendors.
 
-> **Daily delivery, month-end sorted.** — Rs 399/mo
+> **Daily delivery, month-end sorted.** — subscription · pricing on discovery
 
 This is **not** the app. It is a static, self-contained explainer page whose one
 job is to make the product idea instantly clear to (a) a non-technical Indian SMB
